@@ -40,11 +40,11 @@ public class External : IJob
                     {
                         while (reader.Read())
                         {
-                            var regionId = reader.GetString(1);
-                            var latitude = reader.GetDouble(2);
-                            var longitude = reader.GetDouble(3);
-                            var DisaterType = reader.GetString(4);
-                            var ThresholdScore = reader.GetInt32(5);
+                            var regionId = reader.GetString(0);
+                            var latitude = reader.GetDouble(1);
+                            var longitude = reader.GetDouble(2);
+                            var DisaterType = reader.GetString(3);
+                            var ThresholdScore = reader.GetInt32(4);
 
                             var api = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&minlatitude="+ latitude + "&minlongitude=" + longitude + "&maxlatitude=" + latitude + "&maxlongitude=" + longitude ;
 

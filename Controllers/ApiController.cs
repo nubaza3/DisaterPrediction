@@ -134,5 +134,59 @@ namespace disaterprediction.Controllers
             }
         }
 
+        public JsonResult DisaterRiskReport()
+        {
+            try
+            {
+
+                var disaterrisk = new List<DisaterRisk>();
+                string connectionString = ConfigurationManager.ConnectionStrings["Disater"].ConnectionString;
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    using (var cmd = new SQLiteCommand(@"select RegionId , DisaterType, RiskScore, RiskLevel,AlertTriggered from DisaterRiskReport", conn))
+                    {
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            using (SQLiteDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    var data = new DisaterRisk();
+
+                                    data.RegionID = reader.GetString(0);
+                                    data.DisaterTypes = reader.GetString(1);
+                                    data.RiskScore = reader.GetInt32(2);
+                                    data.RiskLevel = reader.GetString(3);
+                                    data.AlertTriggered = reader.GetString(4);
+
+
+                                    disaterrisk.Add(data);
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("no values");
+                        }
+                    }
+                }
+                return Json(new
+                {
+                    IsSuccess = true,
+                    disaterrisk
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                });
+            }
+        }
+
     }
 }

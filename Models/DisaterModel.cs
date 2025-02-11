@@ -33,11 +33,11 @@ namespace disaterprediction.Models
         public string RegionID { get; set; }
         public string DisaterTypes { get; set; }
 
-        public int ThresholdScore { get; set; }
+        public int RiskScore { get; set; }
 
         public string RiskLevel { get; set; }
 
-        public bool AlertTriggered { get; set; }
+        public string AlertTriggered { get; set; }
     }
 
     public class responseAPI
@@ -105,4 +105,5 @@ namespace disaterprediction.Models
 
         public decimal[] DisaterTypes { get; set; }
     }
+
 }
