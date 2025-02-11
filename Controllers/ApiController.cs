@@ -143,7 +143,7 @@ namespace disaterprediction.Controllers
                 string connectionString = ConfigurationManager.ConnectionStrings["Disater"].ConnectionString;
                 using (SQLiteConnection conn = new SQLiteConnection(connectionString))
                 {
-                    using (var cmd = new SQLiteCommand(@"select RegionId , DisaterType, RiskScore, RiskLevel,AlertTriggered from DisaterRiskReport", conn))
+                    using (var cmd = new SQLiteCommand("select RegionId , DisaterType, RiskScore, RiskLevel,AlertTriggered from DisaterRiskReport", conn))
                     {
                         var result = cmd.ExecuteScalar();
                         if (result != null)
