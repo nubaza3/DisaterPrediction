@@ -108,7 +108,7 @@ public class External : IJob
 
                                         if(i.properties.sig >= ThresholdScore)
                                         {
-                                            using (SQLiteCommand report = new SQLiteCommand("INSERT INTO DisaterRiskReport (RegionId, Disatertype, RiskLevel,AlertMessage,Timestamp) VALUES (@RegionId, @Disatertype, @RiskLevel,@AlertMessage,@Timestamp)", conn))
+                                            using (SQLiteCommand report = new SQLiteCommand("INSERT INTO AlertData (RegionId, Disatertype, RiskLevel,AlertMessage,Timestamp) VALUES (@RegionId, @Disatertype, @RiskLevel,@AlertMessage,@Timestamp)", conn))
                                             {
                                                 report.Parameters.AddWithValue("@RegionId", regionId);
                                                 report.Parameters.AddWithValue("@Disatertype", DisaterType);
